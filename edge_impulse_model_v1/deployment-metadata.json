@@ -1,0 +1,147 @@
+{
+    "version": 1,
+    "samplesPerInference": 1024,
+    "axesCount": 1,
+    "classes": [
+        "cat",
+        "dog"
+    ],
+    "deployCounter": 1,
+    "folders": {
+        "input": "/home/input",
+        "output": "/home/output"
+    },
+    "frequency": 1000,
+    "impulse": {
+        "inputBlocks": [
+            {
+                "id": 2,
+                "type": "image",
+                "name": "Image",
+                "title": "Image data",
+                "resizeMethod": "lanczos3",
+                "imageWidth": 32,
+                "imageHeight": 32,
+                "resizeMode": "fit-short",
+                "cropAnchor": "middle-center",
+                "primaryVersion": true
+            }
+        ],
+        "dspBlocks": [
+            {
+                "id": 3,
+                "type": "image",
+                "name": "Image",
+                "axes": [
+                    "image"
+                ],
+                "title": "Image",
+                "primaryVersion": true,
+                "input": 2,
+                "implementationVersion": 1,
+                "metadata": {
+                    "created": "2023-11-30T23:11:35.581Z",
+                    "dspConfig": {
+                        "options": {
+                            "channels": "RGB"
+                        },
+                        "performance": {
+                            "latency": 4,
+                            "ram": 4096
+                        },
+                        "calculateFeatureImportance": false
+                    },
+                    "labels": [
+                        "cat",
+                        "dog"
+                    ],
+                    "valuesPerAxis": 3072,
+                    "windowCount": 400,
+                    "featureCount": 3072,
+                    "windowSizeMs": 0,
+                    "windowIncreaseMs": 0,
+                    "frequency": 0,
+                    "padZeros": false,
+                    "outputConfig": {
+                        "type": "image",
+                        "shape": {
+                            "width": 32,
+                            "height": 32,
+                            "channels": 3,
+                            "frames": 1
+                        }
+                    },
+                    "performance": {
+                        "latency": 4,
+                        "ram": 4096
+                    },
+                    "fftUsed": [],
+                    "includeEmptyLabels": false,
+                    "inputShape": [
+                        1024
+                    ],
+                    "includedSamplesAreInOrder": true
+                }
+            }
+        ],
+        "learnBlocks": [
+            {
+                "id": 5,
+                "type": "keras-transfer-image",
+                "name": "Transfer learning",
+                "dsp": [
+                    3
+                ],
+                "title": "Transfer Learning (Images)",
+                "primaryVersion": true,
+                "mutated": true
+            }
+        ]
+    },
+    "project": {
+        "name": "capcomp",
+        "id": 317314,
+        "owner": "Victor Oliveira",
+        "apiKey": "ei_dda73a2151c851d57b28f9364208d2d7d5626bc8f42fabdf8e7a41bd33a4423b",
+        "studioHost": "localhost:4800"
+    },
+    "sensor": "camera",
+    "tfliteModels": [
+        {
+            "arenaSize": 121388,
+            "inputFrameSize": 3072,
+            "inputTensor": "input_1",
+            "outputTensor": "dense_1/Softmax:0",
+            "details": {
+                "modelType": "int8",
+                "inputs": [
+                    {
+                        "dataType": "int8",
+                        "name": "serving_default_x:0",
+                        "shape": [
+                            1,
+                            32,
+                            32,
+                            3
+                        ],
+                        "quantizationScale": 0.003921568859368563,
+                        "quantizationZeroPoint": -128
+                    }
+                ],
+                "outputs": [
+                    {
+                        "dataType": "int8",
+                        "name": "StatefulPartitionedCall:0",
+                        "shape": [
+                            1,
+                            2
+                        ],
+                        "quantizationScale": 0.00390625,
+                        "quantizationZeroPoint": -128
+                    }
+                ]
+            },
+            "modelPath": "/home/input/trained.tflite"
+        }
+    ]
+}
